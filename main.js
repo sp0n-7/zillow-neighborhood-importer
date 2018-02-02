@@ -7,7 +7,7 @@ function pbcopy(data) {
 
 function appendInsertStatement(statement, props, coords) {
 	coords = coords.map(function(ll) {
-		return ll[0] + " " + ll[1]
+		return ll[1] + " " + ll[0]
 	}).join(',');
 	coords = "POLYGON((" + coords + "))";
 	statement += `\nINSERT INTO nyc_neighborhoods(name, geometry, city, state, county, region_id) VALUES("${props.Name}",ST_GeomFromText("${coords}"), "${props.City}", "${props.State}", "${props.County}", "${props.RegionID}");`;
@@ -35,5 +35,6 @@ fs.readFile('./neighborhoods.json', function(err,data) {
 		})
 	})
 	pbcopy(insertStatement)
+  console.log("INSERT statement copied to clipboard")
 
 })
