@@ -43,7 +43,7 @@ fs.readFile('./neighborhoods.json', function(err,data) {
 
     if (polygonType && polygonType === "MultiPolygon") {
       insertStatement += getMultiPolygonInsertStatement(props, neighborhood.geometry.coordinates);
-    } else {
+    } else if (polygonType && polygonType === "Polygon") {
       insertStatement += getPolygonInsertStatement(props, neighborhood.geometry.coordinates[0]);
     }
 	})
